@@ -11,14 +11,17 @@ namespace App\Http\Controllers\System;
 
 use App\Components\Common;
 use App\Http\Controllers\AuthController;
-use App\Rule;
+use App\Model\BaseModel;
+use App\Model\ModelFactory;
+use App\Model\Rule;
 use App\Components\Code;
 
 class RuleController extends AuthController
 {
     public function getTreeList()
     {
-        $list = Rule::getInstance()->getList($this->request->all());
+
+        $list = Rule::getInstance(Rule::class)->getList($this->request->all());
         $tree = Common::generateRuleTree($list, 0);
 
         return $this->sendJson([

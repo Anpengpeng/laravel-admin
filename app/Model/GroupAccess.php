@@ -6,14 +6,14 @@
  * Time: 16:26
  */
 
-namespace App;
+namespace App\Model;
 
 
 use Illuminate\Database\Eloquent\Model;
 
 class GroupAccess extends Model
 {
-    protected $table = 'yy_auth_group_access';
+    protected $table = 'auth_group_access';
     public static $instance;
     public $timestamps = false;
 

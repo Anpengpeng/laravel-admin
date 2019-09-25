@@ -6,26 +6,26 @@
  * Time: 17:58
  */
 
-namespace App;
+namespace App\Model;
 
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rule extends Model
+class Rule extends BaseModel
 {
-    protected $table = 'yy_auth_rule';
+    protected $table = 'auth_rule';
     public $timestamps = false;
 
     public static $instance;
 
-    public static function getInstance()
-    {
-        if(!self::$instance) {
-            self::$instance = new Rule();
-        }
-
-        return self::$instance;
-    }
+//    public static function getInstance()
+//    {
+//        if(!self::$instance) {
+//            self::$instance = new Rule();
+//        }
+//
+//        return self::$instance;
+//    }
 
     public function getList($condition = [])
     {

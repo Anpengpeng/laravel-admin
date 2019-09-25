@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\System;
 
 use App\Components\Code;
-use App\Group;
+use App\Model\Group;
 use App\Http\Controllers\AuthController;
 
 class GroupController extends AuthController

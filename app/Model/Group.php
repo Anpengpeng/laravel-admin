@@ -6,14 +6,14 @@
  * Time: 14:04
  */
 
-namespace App;
+namespace App\Model;
 
 
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $table = 'yy_auth_group';
+    protected $table = 'auth_group';
     public $timestamps = false;
 
     public static $instance;
@@ -23,7 +23,7 @@ class Group extends Model
         if(!self::$instance) {
             self::$instance = new Group();
         }
-        
+
         return self::$instance;
     }
 

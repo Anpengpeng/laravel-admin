@@ -12,8 +12,8 @@ namespace App\Http\Controllers\System;
 use App\Components\Code;
 use App\Components\Common;
 use App\Http\Controllers\AuthController;
-use App\Admin;
-use App\SystemLogs;
+use App\Model\Admin;
+use App\Model\SystemLogs;
 use Illuminate\Http\Request;
 
 class AdminController extends AuthController

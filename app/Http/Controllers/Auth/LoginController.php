@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Admin;
+use App\Model\Admin;
 use App\Components\Code;
 use App\Components\Common;
 use App\Http\Controllers\Controller;
-use App\Rule;
+use App\Model\Rule;
 
 class LoginController extends Controller
 {

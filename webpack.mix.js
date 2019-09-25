@@ -13,7 +13,7 @@ let rm = require('rimraf');
  */
 
 const buildRoot = 'public/build';
-const devSeverHost = 'local.admin.com';
+const devSeverHost = 'www.admin.local';
 
 rm(buildRoot, err => {
     if (err) throw err

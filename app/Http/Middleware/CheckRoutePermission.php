@@ -11,7 +11,7 @@ namespace App\Http\Middleware;
 use App\Components\Code;
 use App\Components\Common;
 use App\Http\Controllers\Controller;
-use App\SystemLogs;
+use App\Model\SystemLogs;
 use Closure;
 
 class CheckRoutePermission

@@ -6,14 +6,14 @@
  * Time: 15:14
  */
 
-namespace App;
+namespace App\Model;
 
 
 use Illuminate\Database\Eloquent\Model;
 
 class SystemLogs extends Model
 {
-    protected $table = 'yy_admin_log';
+    protected $table = 'admin_log';
 
     public $timestamps = false;
 

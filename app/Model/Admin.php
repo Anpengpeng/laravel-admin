@@ -6,14 +6,14 @@
  * Time: 14:31
  */
 
-namespace App;
+namespace App\Model;
 
 
 use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    protected $table = 'yy_auth_admin';
+    protected $table = 'auth_admin';
 
     public $timestamps = false;
     /**
@@ -32,7 +32,7 @@ class Admin extends Model
         if(!self::$instance) {
             self::$instance = new self();
         }
-        
+
         return self::$instance;
     }
 
@@ -43,7 +43,7 @@ class Admin extends Model
                 unset($condition[$key]);
             }
         }
-     
+
         $data = $this->where($condition)
             ->orderBy('create_time', 'desc')
             ->paginate($pageSize)
