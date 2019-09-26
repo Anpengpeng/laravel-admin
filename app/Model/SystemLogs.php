@@ -9,9 +9,8 @@
 namespace App\Model;
 
 
-use Illuminate\Database\Eloquent\Model;
 
-class SystemLogs extends Model
+class SystemLogs extends BaseModel
 {
     protected $table = 'admin_log';
 
@@ -19,14 +18,14 @@ class SystemLogs extends Model
 
     public static $instance;
 
-    public static function getInstance()
-    {
-        if(!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
+//    public static function getInstance()
+//    {
+//        if(!self::$instance) {
+//            self::$instance = new self();
+//        }
+//
+//        return self::$instance;
+//    }
 
     public function getList($condition, $pageSize = 20)
     {

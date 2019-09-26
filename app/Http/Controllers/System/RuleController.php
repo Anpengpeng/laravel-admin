@@ -11,10 +11,9 @@ namespace App\Http\Controllers\System;
 
 use App\Components\Common;
 use App\Http\Controllers\AuthController;
-use App\Model\BaseModel;
-use App\Model\ModelFactory;
 use App\Model\Rule;
 use App\Components\Code;
+use Illuminate\Support\Facades\Log;
 
 class RuleController extends AuthController
 {
@@ -54,13 +53,13 @@ class RuleController extends AuthController
     public function save()
     {
         if(!$this->request->input('id')) {
-            $rows = Rule::getInstance()->getRows(['name' => $this->request->input('name')]);
+            $rows = Rule::getInstance(Rule::class)->getRows(['name' => $this->request->input('name')]);
             if(!empty($rows)) {
                 return $this->sendError(Code::RULE_EXIST);
             }
         }
 
-        Rule::getInstance()->saveData($this->request->all());
+        Rule::getInstance(Rule::class)->saveData($this->request->all());
 
         return $this->sendJson();
     }
@@ -71,7 +70,7 @@ class RuleController extends AuthController
      */
     public function get()
     {
-        $rows = Rule::getInstance()->getRows(['id' => $this->request->input('id')]);
+        $rows = Rule::getInstance(Rule::class)->getRows(['id' => $this->request->input('id')]);
         return $this->sendJson($rows[0] ?? []);
     }
 
@@ -81,7 +80,7 @@ class RuleController extends AuthController
     public function getPathInfo()
     {
         $path = $this->request->input('path');
-        $list = Rule::getInstance()->getList();
+        $list = Rule::getInstance(Rule::class)->getList();
 
         $newList = $curRow = [];
         foreach ($list as $row) {
@@ -111,7 +110,7 @@ class RuleController extends AuthController
      */
     public function delete()
     {
-        Rule::getInstance()->deleteRow($this->request->input('id'));
+        Rule::getInstance(Rule::class)->deleteRow($this->request->input('id'));
         $this->sendJson();
     }
 

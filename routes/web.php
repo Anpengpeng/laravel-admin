@@ -60,6 +60,13 @@ Route::prefix('/api/')->group(function () {
         Route::post('admin/password/change', 'AdminController@changePassword');
     });
 
+    /**
+     * 学生管理
+     */
+    Route::prefix('student/')->namespace('Student')->group(function (){
+        Route::get('list', 'StudentController@studentList');
+    });
+
 });
 
 

@@ -13,11 +13,11 @@ class BaseModel extends Model
     /**
      * @param $modelName
      * @return mixed
-     * @throws \ReflectionException
      */
     public static function getInstance($modelName)
     {
         if (!isset(self::$modelArr[$modelName])) {
+            info($modelName);
             $class = new $modelName;
             self::$modelArr[$modelName] = $class;
         }

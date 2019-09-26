@@ -57,14 +57,14 @@ class LoginController extends Controller
 
     private function loginSuccess($userInfo)
     {
-        Admin::getInstance()->saveData([
+        Admin::getInstance(Admin::class)->saveData([
             'id'         => $userInfo['id'],
             'try_time'   => 0,
             'last_login' => microtime(true),
             'last_ip'    => $this->request->getClientIp()
         ]);
 
-        $rules = Rule::getInstance()->getRulesByUID($userInfo['id']);
+        $rules = Rule::getInstance(Rule::class)->getRulesByUID($userInfo['id']);
         $this->request->session()->put('loginInfo', [
             'admin_id' => $userInfo['id'],
             'username' => $userInfo['username'],
@@ -72,7 +72,7 @@ class LoginController extends Controller
         ]);
 
         $menus = [];
-        $list = Rule::getInstance()->getList(['menu' => 1, 'status' => 1]);
+        $list = Rule::getInstance(Rule::class)->getList(['menu' => 1, 'status' => 1]);
         foreach ($list as $row) {
             if(in_array($row['name'], $rules)) {
                 $menus[] = $row;

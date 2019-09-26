@@ -68,12 +68,12 @@ class Rule extends BaseModel
      */
     public function getRulesByUID($adminId)
     {
-        $groupIds = GroupAccess::getInstance()->getGroupIdByUID($adminId);
+        $groupIds = GroupAccess::getInstance(GroupAccess::class)->getGroupIdByUID($adminId);
 
         $data = [];
         //god组有所有权限
         if(in_array(1, $groupIds)) {
-            $rules = Rule::getInstance()->where([
+            $rules = Rule::getInstance(Rule::class)->where([
                 'status' => 1,
                 'deleted' => 0
             ])->get()->toArray();
@@ -84,11 +84,11 @@ class Rule extends BaseModel
             return $data;
         }
 
-        $groups = Group::getInstance()->whereIn('id', $groupIds)->get()->toArray();
+        $groups = Group::getInstance(Group::class)->whereIn('id', $groupIds)->get()->toArray();
 
         foreach ($groups as $row) {
             $ruleIds = explode(',' , $row['rules']);
-            $rules = Rule::getInstance()->where([
+            $rules = Rule::getInstance(Rule::class)->where([
                 'status' => 1,
                 'deleted' => 0
             ])->whereIn('id', $ruleIds)->get()->toArray();

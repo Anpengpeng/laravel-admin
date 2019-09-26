@@ -9,23 +9,22 @@
 namespace App\Model;
 
 
-use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class Group extends BaseModel
 {
     protected $table = 'auth_group';
     public $timestamps = false;
 
     public static $instance;
 
-    public static function getInstance()
-    {
-        if(!self::$instance) {
-            self::$instance = new Group();
-        }
-
-        return self::$instance;
-    }
+//    public static function getInstance()
+//    {
+//        if(!self::$instance) {
+//            self::$instance = new Group();
+//        }
+//
+//        return self::$instance;
+//    }
 
     public function getList($condition)
     {

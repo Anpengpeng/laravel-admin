@@ -11,20 +11,20 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GroupAccess extends Model
+class GroupAccess extends BaseModel
 {
     protected $table = 'auth_group_access';
     public static $instance;
     public $timestamps = false;
 
-    public static function getInstance()
-    {
-        if(!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
+//    public static function getInstance()
+//    {
+//        if(!self::$instance) {
+//            self::$instance = new self();
+//        }
+//
+//        return self::$instance;
+//    }
 
     public function getGroupIdByUID($adminId)
     {

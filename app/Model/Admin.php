@@ -9,9 +9,8 @@
 namespace App\Model;
 
 
-use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Admin extends BaseModel
 {
     protected $table = 'auth_admin';
 
@@ -27,14 +26,14 @@ class Admin extends Model
 
     public static $instance;
 
-    public static function getInstance()
-    {
-        if(!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
+//    public static function getInstance()
+//    {
+//        if(!self::$instance) {
+//            self::$instance = new self();
+//        }
+//
+//        return self::$instance;
+//    }
 
     public function getList($condition, $pageSize = 20)
     {
@@ -52,7 +51,7 @@ class Admin extends Model
         foreach ($data['data'] as &$row) {
             $row['last_login']  = date('Y-m-d H:i:s', $row['last_login']);
             $row['create_time'] = date('Y-m-d H:i:s', $row['create_time']);
-            $row['groups']      = GroupAccess::getInstance()->getGroupIdByUID($row['id']);
+            $row['groups']      = GroupAccess::getInstance(GroupAccess::class)->getGroupIdByUID($row['id']);
         }
 
         return $data;
@@ -96,7 +95,7 @@ class Admin extends Model
 
     public function saveAdminGroup($adminId, $groups)
     {
-        GroupAccess::getInstance()->where('uid', $adminId)->delete();
+        GroupAccess::getInstance(GroupAccess::class)->where('uid', $adminId)->delete();
         foreach ($groups as $id) {
             $model = new GroupAccess();
             $model->uid = $adminId;

@@ -51,7 +51,7 @@ class CheckRoutePermission
         if(isset($params['password'])) unset($params['password']);
 
         $loginInfo = session('loginInfo');
-        SystemLogs::getInstance()->saveData([
+        SystemLogs::getInstance(SystemLogs::class)->saveData([
             'func'     => $request->getPathInfo(),
             'url'      => $request->getRequestUri(),
             'ip'       => $request->getClientIp(),

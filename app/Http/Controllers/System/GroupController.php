@@ -19,7 +19,7 @@ class GroupController extends AuthController
      */
     public function getList()
     {
-        $data = Group::getInstance()->getList($this->request->all());
+        $data = Group::getInstance(Group::class)->getList($this->request->all());
 
         return $this->sendJson([
             'list' => $data,
@@ -36,13 +36,13 @@ class GroupController extends AuthController
     public function save()
     {
         if(!$this->request->input('id')) {
-            $rows = Group::getInstance()->getRows(['title' => $this->request->input('title')]);
+            $rows = Group::getInstance(Group::class)->getRows(['title' => $this->request->input('title')]);
             if(!empty($rows)) {
                 return $this->sendError(Code::GROUP_EXIST);
             }
         }
 
-        Group::getInstance()->saveData($this->request->all());
+        Group::getInstance(Group::class)->saveData($this->request->all());
 
         return $this->sendJson();
     }

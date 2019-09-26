@@ -23,7 +23,9 @@ class AdminController extends AuthController
      */
     public function getList()
     {
-        $data = Admin::getInstance()->getList($this->request->all());
+        /** @var Admin $admin */
+        $admin = Admin::getInstance(Admin::class);
+        $data = $admin->getList($this->request->all());
 
         $data['auth'] = [
             'canAdd'   => $this->canAdd(),
@@ -38,7 +40,7 @@ class AdminController extends AuthController
      */
     public function getLogs()
     {
-        $data = SystemLogs::getInstance()->getList($this->request->all());
+        $data = SystemLogs::getInstance(SystemLogs::class)->getList($this->request->all());
         return $this->sendJson($data);
     }
 
@@ -48,13 +50,13 @@ class AdminController extends AuthController
     public function save()
     {
         if(!$this->request->input('id')) {
-            $rows = Admin::getInstance()->getRows(['username' => $this->request->input('username')]);
+            $rows = Admin::getInstance(Admin::class)->getRows(['username' => $this->request->input('username')]);
             if(!empty($rows)) {
                 return $this->sendError(Code::ADMIN_EXIST);
             }
         }
 
-        Admin::getInstance()->saveData($this->request->all());
+        Admin::getInstance(Admin::class)->saveData($this->request->all());
 
         return $this->sendJson();
     }
@@ -72,7 +74,7 @@ class AdminController extends AuthController
     public function saveAvatar()
     {
         $this->setLoginInfo();
-        Admin::getInstance()->saveData([
+        Admin::getInstance(Admin::class)->saveData([
             'id' => $this->loginInfo['admin_id'],
             'avatar' => $this->request->input('avatar')
         ]);
@@ -83,11 +85,11 @@ class AdminController extends AuthController
     public function changePassword()
     {
         $this->setLoginInfo();
-        if(!Admin::getInstance()->checkPassword($this->loginInfo['admin_id'], $this->request->input('old_password'))) {
+        if(!Admin::getInstance(Admin::class)->checkPassword($this->loginInfo['admin_id'], $this->request->input('old_password'))) {
             return $this->sendError(Code::OLD_PASSWORD_WRONG);
         }
 
-        Admin::getInstance()->saveData([
+        Admin::getInstance(Admin::class)->saveData([
             'id' => $this->loginInfo['admin_id'],
             'password' => $this->request->input('password')
         ]);
@@ -98,7 +100,7 @@ class AdminController extends AuthController
     public function getProfile()
     {
         $this->setLoginInfo();
-        $rows = Admin::getInstance()->getRows([
+        $rows = Admin::getInstance(Admin::class)->getRows([
             'id' => $this->loginInfo['admin_id'],
         ]);
 
